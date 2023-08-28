@@ -1,35 +1,47 @@
-"use client";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { apiActions } from "../redux/store";
 
 import axios from "axios";
 
-import { useState } from "react";
+export default function HTTPSend(props: any) {
+  console.log("HTTPSend...");
+  //const [httpMethod, setHTTPMethod] = useState("");
+  //const [httpURL, setHTTPURL] = useState("");
+  const dispatch = useDispatch();
+  const url = useSelector((state: any) => state.api.url);
+  console.log("got the url from store", url);
 
-export default function HTTPParamsList(props: any) {
-  const [httpMethod, setHTTPMethod] = useState("");
-  const [httpURL, setHTTPURL] = useState("");
+  const urlChangeHandler = (event: any) => {
+    const httpURL = event.target.value;
+    console.log(`urlChangeHandler: dispatching ${httpURL}`, event);
+    dispatch(apiActions.apiReducer({ url: httpURL }));
+  };
 
-  const sendHTTP = (event) => {
+  const sendHTTP = (event: any) => {
     event.preventDefault();
 
     axios({
-      url: httpURL,
-      method: httpMethod,
-      /*params: ,
+      url: url,
+      /*method: httpMethod,
+      params: ,
             headers: ,*/
     }).then((response) => {
       console.log(response);
     });
   };
 
+  //onSelect={(event) => setHTTPMethod(event.target.value)}
   return (
     <>
+    <div>{url}</div>
       <select
         className="form-select flex-grow-0 w-auto"
         aria-label="flex-grow"
         data-method
-        onSelect={(event) => setHTTPMethod(event.target.value)}
+        
       >
-        <option value="GET" defaultValue={true}>
+        <option value="GET">
           GET
         </option>
         <option value="POST">POST</option>
@@ -40,12 +52,9 @@ export default function HTTPParamsList(props: any) {
         data-url
         required
         className="form-control"
-        type="url"
-        placeholder="https://example.com"
-        onChange={(event) => {
-          setHTTPURL(event.target.value);
-        }}
-      />
+        type="url"        
+        onChange={urlChangeHandler}
+      />      
       <button type="submit" className="btn btn-primary" onClick={sendHTTP}>
         Send
       </button>

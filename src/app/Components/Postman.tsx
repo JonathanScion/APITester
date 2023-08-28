@@ -1,28 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState , useEffect} from "react";
+import { Provider } from 'react-redux';
 
 import HttpParamsList from "./HTTPParamsList";
 import HTTPSend from "./HTTPSend";
+import store from '../redux/store/index'
+import persistor from '../redux/store/index'
+import { PersistGate} from "redux-persist/integration/react";
+
+
 
 //const httpParams: any[] = [];
 
 export default function Postman() {
   const [httpParams, setHttpParam] = useState([]);
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+ 
+  
 
-  const addHttpParamAddHandler = (event) => {
-    console.log(
-      `addHttpParamAddHandler: httpParams.length=${httpParams.length}`
-    );
+  const addHttpParamAddHandler = (event: any) => {
     setHttpParam([...httpParams]);
   };
 
   return (
     <div>
+      <h1>{isClient ? 'This is never prerendered' : 'Prerendered'}</h1>
       <div className="p-4">
         <form data-form>
           <div className="input-group mb-4">
-            <HTTPSend />
+          <Provider store={store}>
+              <HTTPSend />
+          </Provider>
           </div>
           <ul className="nav nav-tabs" role="tablist">
             <li className="nav-item" role="presentation">
@@ -110,7 +123,7 @@ export default function Postman() {
               <div
                 data-json-request-body
                 className="overflow-auto"
-                styles="max-height: 200px;"
+                style={{maxHeight: 200}}
               ></div>
             </div>
           </div>
