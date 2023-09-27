@@ -6,9 +6,6 @@ import { Provider } from 'react-redux';
 import HttpParamsList from "./HTTPParamsList";
 import HTTPSend from "./HTTPSend";
 import store from '../redux/store/index'
-import persistor from '../redux/store/index'
-import { PersistGate} from "redux-persist/integration/react";
-
 
 
 //const httpParams: any[] = [];
@@ -21,7 +18,7 @@ export default function Postman() {
     setIsClient(true)
   }, [])
  
-  
+  //postgres://JonathanScion:BKuNqkY9ESU2@ep-sweet-recipe-31367253.us-east-2.aws.neon.tech/neondb
 
   const addHttpParamAddHandler = (event: any) => {
     setHttpParam([...httpParams]);
@@ -136,7 +133,7 @@ export default function Postman() {
             <HttpParamsList HTTPParams={[...httpParams]} />
           </div>
         </div>
-      </div>
+      </div>      
     </div>
   );
 }

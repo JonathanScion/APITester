@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 
 const initialState = {
   url: "",
+  data: ""
 };
 
 console.log('creating slice')
@@ -15,6 +16,10 @@ const apiSlice = createSlice({
     apiReducer(state, action) {
       console.log(`apiReducer: saving`,action.payload)
       state.url = action.payload.url;
+    },
+    apiFetched(state, action) {
+      console.log(`apiFetched: saving`,action.payload)
+      state.data = action.payload.data;
     },
   },
 });

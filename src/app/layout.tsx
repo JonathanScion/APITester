@@ -7,7 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import Head from "next/head";
 import Script from "next/script";
 import { Inter } from 'next/font/google'
-
+import NavMenu from "./NavMenu";
+//import Providers from "./Components/Providers"
+import AuthProvider from './AuthProvider';
 
 
 
@@ -29,7 +31,10 @@ export default function RootLayout({
       <meta name="viewport" content="width=device-width, initial-scale=1" />
     </Head>
     <body className={inter.className}>
-      {children}
+      <AuthProvider>
+        <NavMenu></NavMenu>
+        {children}
+      </AuthProvider>
     </body>
     </>
   );

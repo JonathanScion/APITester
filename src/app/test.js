@@ -17,8 +17,7 @@
 const maxSum = getArrayMaxSum([1,2,-5,4,5,6,-16,8,9,10]); // 55
 console.log(maxSum);*/
 
-
-
+/*
 function getArrayMaxSumToPointers(ar) {
     let maxSum = ar[0], currSum=0;
     
@@ -36,3 +35,5 @@ function getArrayMaxSumToPointers(ar) {
 
 const maxSum = getArrayMaxSumToPointers([1,2,-5,4,5,6,-16,8,9,10]); // 55
 console.log(maxSum);
+
+*/
